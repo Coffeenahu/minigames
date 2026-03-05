@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import ResultOverlay from '../../components/common/ResultOverlay';
+import pirateNormal from '../../img/pirate_normal.png';
+import pirateExploded from '../../img/pirate_exploded.png';
 import styles from './PirateGame.module.css';
 
 function initGame(players) {
-  const totalSlots = players.length * 2;
+  const totalSlots = players.length * 4;
   const dangerSlot = Math.floor(Math.random() * totalSlots);
   return { totalSlots, dangerSlot };
 }
@@ -12,15 +14,14 @@ export default function PirateGame({ players, onReset }) {
   const [game] = useState(() => initGame(players));
   const { totalSlots, dangerSlot } = game;
 
-  // slotOwner[i] = 해당 슬롯을 찌른 플레이어 이름 (null = 미사용)
   const [slotOwner, setSlotOwner] = useState(() => Array(totalSlots).fill(null));
-  const [turnIdx, setTurnIdx] = useState(0); // players 배열 인덱스 (순환)
+  const [turnIdx, setTurnIdx] = useState(0);
   const [loser, setLoser] = useState(null);
   const [explodedSlot, setExplodedSlot] = useState(null);
   const [showResult, setShowResult] = useState(false);
 
-  // animation toggles
-  const [jumping, setJumping] = useState(false);
+  const [isExploded, setIsExploded] = useState(false);
+  const [exploding, setExploding] = useState(false);
   const [shaking, setShaking] = useState(false);
 
   const currentPlayer = players[turnIdx % players.length];
@@ -33,25 +34,18 @@ export default function PirateGame({ players, onReset }) {
     next[slotIdx] = currentPlayer;
     setSlotOwner(next);
 
-    // barrel always shakes a little when stabbed
-    setShaking(true);
-    setTimeout(() => setShaking(false), 500);
-
     if (slotIdx === dangerSlot) {
-      // explosion: pirate pops and barrel shakes big
-      setJumping(true);
       setExplodedSlot(slotIdx);
       setLoser(currentPlayer);
+      setExploding(true);
+      setTimeout(() => setIsExploded(true), 300);
+      setTimeout(() => setExploding(false), 700);
       setTimeout(() => setShowResult(true), 1400);
-      // clear jump class after animation so overlay isn't stuck
-      setTimeout(() => setJumping(false), 900);
     } else {
+      setShaking(true);
+      setTimeout(() => setShaking(false), 450);
       setTurnIdx((t) => t + 1);
     }
-  };
-
-  const reset = () => {
-    onReset();
   };
 
   return (
@@ -59,58 +53,49 @@ export default function PirateGame({ players, onReset }) {
       <div className={styles.header}>
         {!loser ? (
           <>
-            <p className={styles.turn}>{currentPlayer}의 차례</p>
-            <p className={styles.hint}>꽂을 위치를 선택하세요 ({stabbedCount}/{totalSlots})</p>
+            <p className={styles.turn}>⚔️ {currentPlayer}의 차례</p>
+            <p className={styles.hint}>칼을 꽂을 위치를 선택하세요 ({stabbedCount}/{totalSlots})</p>
           </>
         ) : (
           <p className={styles.explodingText}>💥 폭발!</p>
         )}
       </div>
 
-      {/* 배럴 + 해적 */}
-      <div className={styles.barrelContainer}>
-        <div className={`${styles.barrel} 
-            ${loser ? styles.exploded : ''} 
-            ${shaking ? styles.barrelShaking : ''}`}>
-          <div className={styles.barrelBody}></div>
-          <div className={styles.barrelTop}></div>
-        </div>
-        <div className={`${styles.pirate} ${jumping ? styles.pirateJumping : ''}`}>
-          {/* 해적 귀여운 버전 */}
-          <div className={styles.pirateHead}>
-            <div className={styles.pirateEar}></div>
-            <div className={styles.pirateFace}>
-              <div className={styles.pirateEye}></div>
-              <div className={styles.pirateEyepatch}></div>
-              <div className={styles.pirateNose}></div>
-            </div>
-            <div className={styles.pirateHat}></div>
-            <div className={styles.pirateMouth}></div>
-          </div>
-          <div className={styles.pirateBody}></div>
-        </div>
+      {/* 해적 + 나무통 이미지 */}
+      <div className={styles.sceneContainer}>
+        <img
+          src={isExploded ? pirateExploded : pirateNormal}
+          className={`
+            ${styles.pirateImg}
+            ${exploding ? styles.exploding : ''}
+            ${shaking ? styles.shaking : ''}
+          `}
+          alt="pirate"
+        />
       </div>
 
       {/* 슬롯 그리드 */}
       <div
         className={styles.slotGrid}
-        style={{ gridTemplateColumns: `repeat(${Math.ceil(totalSlots / 2)}, 1fr)` }}
+        style={{
+          gridTemplateColumns: `repeat(${Math.min(8, Math.ceil(totalSlots / 2))}, 1fr)`
+        }}
       >
         {slotOwner.map((owner, i) => {
-          const isExploded = i === explodedSlot;
+          const isExplodedSlot = i === explodedSlot;
           const isStabbed = owner !== null;
           return (
             <button
               key={i}
               className={`${styles.slot}
                 ${isStabbed ? styles.slotStabbed : styles.slotEmpty}
-                ${isExploded ? styles.slotExploded : ''}
+                ${isExplodedSlot ? styles.slotExploded : ''}
               `}
               onClick={() => stab(i)}
               disabled={isStabbed || !!loser}
               title={owner ?? `슬롯 ${i + 1}`}
             >
-              {isExploded ? (
+              {isExplodedSlot ? (
                 <span className={styles.slotIcon}>💥</span>
               ) : isStabbed ? (
                 <>
@@ -140,7 +125,7 @@ export default function PirateGame({ players, onReset }) {
         ))}
       </div>
 
-      <ResultOverlay visible={showResult} onClose={reset}>
+      <ResultOverlay visible={showResult} onClose={onReset}>
         <div className={styles.resultContent}>
           <p className={styles.boom}>💥</p>
           <h2 className={styles.loserName}>{loser} 탈락!</h2>

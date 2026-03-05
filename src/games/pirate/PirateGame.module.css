@@ -1,355 +1,302 @@
+/* ===== 해양 테마 배경 ===== */
 .wrap {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  padding: 20px;
+  gap: 16px;
+  padding: 20px 16px;
+  min-height: 100vh;
+  background: linear-gradient(
+    180deg,
+    #0a1628 0%,
+    #0d2040 40%,
+    #0f2d50 100%
+  );
 }
 
-.barrelContainer {
-  position: relative;
-  width: 240px;
-  height: 300px; /* 통과 해적 공간 확보 */
-  margin-top: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-}
-
-/* --- 해적 스타일 --- */
-.pirate {
-  position: absolute;
-  bottom: 10px; /* 통 아래쪽에 위치, 통보다 작게 */
-  width: 60px;
-  height: 70px;
-  z-index: 2;
-  transform-origin: bottom center;
-  transition: transform 0.3s ease-out;
-}
-
-.pirateHead {
-  width: 50px;
-  height: 45px;
-  background: #ffdeb4; /* 살색 */
-  border-radius: 50%;
-  margin: 0 auto;
-  position: relative;
-  border: 2px solid #333;
-}
-
-.pirateHat {
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 30px;
-  background: #e74c3c; /* 붉은 반다나 */
-  border-radius: 50% 50% 0 0;
-}
-.pirateHat::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: 50%;
-  width: 20px;
-  height: 12px;
-  background: #e74c3c;
-  transform: translateX(-50%) rotate(45deg);
-}
-
-.pirateFace {
-  position: relative;
-  top: 20px;
-}
-.pirateNose {
-  position: absolute;
-  top: 12px;
-  left: 50%;
-  width: 8px;
-  height: 6px;
-  background: #ffabc4;
-  border-radius: 50%;
-  transform: translateX(-50%);
-}
-.pirateMouth {
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  width: 20px;
-  height: 10px;
-  border: 2px solid #333;
-  border-top: none;
-  border-radius: 0 0 10px 10px;
-  transform: translateX(-50%);
-}
-.pirateEar {
-  position: absolute;
-  top: 20px;
-  left: -6px;
-  width: 10px;
-  height: 12px;
-  background: #ffdeb4;
-  border-radius: 50%;
-}
-
-.pirateEye, .pirateEyepatch {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #000;
-}
-.pirateEye { left: 15px; }
-.pirateEyepatch {
-  left: 35px;
-  width: 12px;
-  height: 12px;
-  background: #333;
-}
-.pirateEyepatch::before { /* 안대 끈 */
-  content: '';
-  position: absolute;
-  width: 50px;
-  height: 2px;
-  background: #333;
-  top: 5px;
-  right: 5px;
-}
-
-.pirateBody {
-  width: 50px;
-  height: 30px;
-  background: #ffcd94; /* 따뜻한 살색, 좀 귀여운 톤 */
-  margin: 0 auto;
-  border-radius: 10px 10px 0 0;
-  border: 2px solid #333;
-  border-bottom: none;
-}
-
-/* --- 나무통 스타일 --- */
-.barrel {
-  position: absolute;
-  bottom: 0;
-  width: 220px;
-  height: 220px;
-  z-index: 1;
-  font-size: 5rem;
-}
-.barrelBody {
-  width: 100%;
-  height: 100%;
-  background: repeating-linear-gradient(90deg, #8b4513 0, #8b4513 10%, #a0522d 10%, #a0522d 20%);
-  border-radius: 20px 20px 10px 10px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: inset 0 0 15px rgba(0,0,0,0.4);
-  border: 5px solid #502916;
-}
-.barrelTop {
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 240px;
-  height: 40px;
-  background: #a0522d;
-  border-radius: 50%;
-  border: 4px solid #502916;
-  z-index: 3;
-}
-
-
-/* 나무통 쇠테 */
-.barrelBody::before,
-.barrelBody::after {
-  content: '';
-  position: absolute;
-  left: -5%;
-  width: 110%;
-  height: 25px;
-  background: #7f8c8d; /* 은색 */
-  border-top: 2px solid #95a5a6;
-  border-bottom: 2px solid #34495e;
-}
-.barrelBody::before { top: 30px; }
-.barrelBody::after { bottom: 30px; }
-
-/* --- 애니메이션 --- */
-.pirateJumping {
-  animation: pirateJump 0.8s cubic-bezier(0.6, -0.28, 0.74, 1.55) forwards;
-}
-
-.barrelShaking {
-  animation: barrelShake 0.5s ease-in-out;
-}
-
-@keyframes pirateJump {
-  0% {
-    transform: translateY(20px) rotate(0deg);
-  }
-  40% {
-    transform: translateY(-140px) rotate(-20deg);
-  }
-  100% {
-    transform: translateY(-120px) rotate(720deg);
-  }
-}
-
-@keyframes barrelShake {
-  0%, 100% { transform: translate(0, 0) rotate(0); }
-  20% { transform: translate(-5px, 0) rotate(-2deg); }
-  40% { transform: translate(5px, 0) rotate(2deg); }
-  60% { transform: translate(-5px, 0) rotate(-2deg); }
-  80% { transform: translate(5px, 0) rotate(2deg); }
-}
-
-.btn, .btnSecondary {
-  padding: 12px 24px;
-  border-radius: 8px;
-  border: 1px solid transparent;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.btn { background-color: #c0392b; color: white; }
-.btn:hover:not(:disabled) { background-color: #e74c3c; }
-.btn:disabled { opacity: 0.5; cursor: not-allowed; }
-.btnSecondary { background-color: #7f8c8d; color: white; }
-
-/* --- 게임 UI 스타일 --- */
+/* ===== 헤더 ===== */
 .header {
   text-align: center;
-  margin-bottom: 10px;
+  padding: 14px 24px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  box-sizing: border-box;
+  backdrop-filter: blur(4px);
 }
 
 .turn {
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 22px;
+  font-weight: 700;
+  color: #FFD700;
+  margin: 0;
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
 }
 
 .hint {
-  font-size: 0.9rem;
-  color: #555;
+  font-size: 13px;
+  color: #a0b8d0;
+  margin: 6px 0 0;
 }
 
 .explodingText {
-  font-size: 2rem;
-  color: #e74c3c;
-  animation: explodeText 0.8s infinite alternate;
-}
-
-@keyframes explodeText {
-  from { transform: scale(1); }
-  to   { transform: scale(1.3); }
-}
-
-.slotGrid {
-  display: grid;
-  gap: 8px;
-  margin-top: 20px;
-  width: 100%;
-  max-width: 400px;
-}
-.slot:nth-child(4n+1) { color: #e74c3c; }
-.slot:nth-child(4n+2) { color: #27ae60; }
-.slot:nth-child(4n+3) { color: #f1c40f; }
-.slot:nth-child(4n+4) { color: #3498db; }
-
-.slot::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 6px;
-  height: 30px;
-  background: currentColor;
-  transform: translate(-50%, -50%) rotate(45deg);
-  border-radius: 2px;
-}
-
-.slot {
-  padding: 12px;
-  background: #ecf0f1;
-  border: 2px solid #bdc3c7;
-  border-radius: 6px;
-  font-size: 1rem;
-  position: relative;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
-}
-
-.slot:hover:not(:disabled) {
-  background: #d0d3d4;
-}
-
-.slotEmpty { color: #333; }
-.slotStabbed {
-  background: #e74c3c;
-  color: white;
-  cursor: default;
-}
-.slotExploded {
-  background: #e67e22;
-  color: white;
+  font-size: 28px;
   font-weight: bold;
+  color: #FF6B35;
+  margin: 0;
+  animation: pulse 0.5s ease-in-out infinite;
+  text-shadow: 0 0 20px rgba(255, 107, 53, 0.8);
 }
 
-.slotIcon { margin-right: 4px; }
-.slotOwner { margin-left: 4px; font-weight: 600; }
-.slotNum { font-weight: bold; }
-
-.turnOrder {
-  margin-top: 20px;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: center;
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
 }
 
-.playerChip {
-  background: #bdc3c7;
-  padding: 6px 12px;
-  border-radius: 12px;
-  font-size: 0.9rem;
-  transition: transform 0.2s;
-}
-
-.activeChip {
-  background: #2ecc71;
-  transform: scale(1.1);
-}
-
-.loserChip {
-  background: #e74c3c;
-  color: white;
-}
-
-.resultContent { text-align: center; padding: 20px; }
-
-.boom {
-  font-size: 4rem;
-  animation: boomPulse 1s infinite alternate;
-}
-
-@keyframes boomPulse {
-  from { transform: scale(1); }
-  to   { transform: scale(1.2); }
-}
-
-.loserName { font-size: 2rem; margin: 10px 0; }
-.subText { font-size: 1rem; color: #555; }
-
-.barrel {
+/* ===== 씬 컨테이너 ===== */
+.sceneContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 5rem;
-  transition: transform 0.3s, color 0.3s;
 }
-.barrel.exploded {
-  animation: barrelShake 0.5s ease-in-out;
-  color: #e74c3c;
-  transform: scale(1.3);
+
+/* ===== 해적+나무통 이미지 ===== */
+.pirateImg {
+  width: 260px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.6));
+  transition: filter 0.2s ease;
+}
+
+/* 흔들기 (안전한 슬롯 클릭) */
+.pirateImg.shaking {
+  animation: shake 0.45s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(0deg) translateX(0); }
+  15%, 45%, 75% { transform: rotate(-2deg) translateX(-4px); }
+  30%, 60%, 90% { transform: rotate(2deg) translateX(4px); }
+}
+
+/* 폭발 (당첨 슬롯 클릭) */
+.pirateImg.exploding {
+  animation: explode 0.7s ease-out;
+}
+
+@keyframes explode {
+  0%   { transform: scale(1) rotate(0deg);   filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6)); }
+  20%  { transform: scale(1.08) rotate(-3deg); filter: drop-shadow(0 0 30px rgba(255,140,0,0.9)) drop-shadow(0 0 60px rgba(255,60,0,0.6)); }
+  45%  { transform: scale(1.15) rotate(3deg);  filter: drop-shadow(0 0 40px rgba(255,200,0,1))   drop-shadow(0 0 80px rgba(255,80,0,0.8)); }
+  70%  { transform: scale(1.05) rotate(-1deg); filter: drop-shadow(0 0 20px rgba(255,120,0,0.7)); }
+  100% { transform: scale(1) rotate(0deg);   filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6)); }
+}
+
+/* ===== 슬롯 그리드 ===== */
+.slotGrid {
+  display: grid;
+  gap: 10px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+}
+
+/* ===== 슬롯 버튼 ===== */
+.slot {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+/* 빈 슬롯 - 구멍 느낌 */
+.slot.slotEmpty {
+  background: radial-gradient(circle at 40% 35%, #2a1a08 0%, #1a0d04 50%, #0d0602 100%);
+  box-shadow:
+    inset 0 4px 12px rgba(0, 0, 0, 0.9),
+    0 2px 6px rgba(0, 0, 0, 0.4),
+    0 0 0 2px rgba(139, 94, 46, 0.5);
+  color: #8B6F47;
+}
+
+.slot.slotEmpty:hover {
+  box-shadow:
+    inset 0 4px 12px rgba(0, 0, 0, 0.8),
+    0 0 0 2px rgba(201, 168, 76, 0.7),
+    0 0 14px rgba(201, 168, 76, 0.3);
+  transform: scale(1.08);
+  color: #C9A84C;
+}
+
+.slot.slotEmpty:active {
+  transform: scale(0.94);
+}
+
+/* 칼이 꽂힌 슬롯 */
+.slot.slotStabbed {
+  background: radial-gradient(circle at 40% 35%, #3d2810 0%, #2a1808 100%);
+  box-shadow:
+    inset 0 6px 16px rgba(0, 0, 0, 0.95),
+    0 0 0 2px rgba(139, 94, 46, 0.4);
+  color: #FFD700;
+  cursor: not-allowed;
+}
+
+/* 폭발한 슬롯 */
+.slot.slotExploded {
+  background: radial-gradient(circle at 50% 50%, #FFD700 0%, #FF6B35 50%, #cc2200 100%);
+  box-shadow:
+    0 0 20px rgba(255, 107, 53, 0.9),
+    0 0 40px rgba(255, 165, 0, 0.5),
+    0 0 0 3px rgba(255, 215, 0, 0.7);
+  animation: slotExplode 0.6s ease-out forwards;
+  color: #fff;
+}
+
+@keyframes slotExplode {
+  0%   { transform: scale(1) rotate(0deg); }
+  40%  { transform: scale(1.25) rotate(20deg); }
+  70%  { transform: scale(1.1) rotate(-10deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.slotIcon {
+  font-size: 20px;
+  display: block;
+  animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes popIn {
+  0%   { opacity: 0; transform: scale(0.5) rotate(-20deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+.slotNum {
+  font-size: 15px;
+  color: #6B5637;
+  font-weight: bold;
+}
+
+.slotOwner {
+  display: block;
+  font-size: 10px;
+  color: #C9A84C;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90%;
+}
+
+.slot:disabled {
+  cursor: not-allowed;
+}
+
+/* ===== 플레이어 턴 표시 ===== */
+.turnOrder {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  box-sizing: border-box;
+}
+
+.playerChip {
+  padding: 7px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #a0b8d0;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.playerChip.activeChip {
+  background: linear-gradient(135deg, #C9A84C, #FFD700);
+  color: #1a0d06;
+  transform: scale(1.12);
+  font-weight: 700;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(201, 168, 76, 0.5);
+}
+
+.playerChip.loserChip {
+  background: linear-gradient(135deg, #8B1a14, #cc2200);
+  color: #ffaaaa;
+  opacity: 0.7;
+  text-decoration: line-through;
+  border-color: transparent;
+}
+
+/* ===== 결과 화면 ===== */
+.resultContent { text-align: center; }
+
+.boom {
+  font-size: 52px;
+  margin: 0 0 12px;
+  animation: fall 0.5s ease-out;
+}
+
+@keyframes fall {
+  0%   { opacity: 0; transform: translateY(-30px) scale(1.6); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.loserName {
+  font-size: 26px;
+  color: #FF6B35;
+  margin: 10px 0;
+}
+
+.subText {
+  font-size: 15px;
+  color: #888;
+}
+
+/* ===== 반응형 ===== */
+@media (max-width: 600px) {
+  .pirateImg {
+    width: 200px;
+  }
+
+  .slotGrid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 8px;
+    padding: 14px;
+  }
+
+  .slotIcon { font-size: 16px; }
+  .slotOwner { font-size: 9px; }
+  .playerChip { font-size: 12px; padding: 6px 12px; }
+  .turn { font-size: 18px; }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .slotGrid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
 }
