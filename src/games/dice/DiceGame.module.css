@@ -1,0 +1,253 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 20px 0;
+}
+
+.turn {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.6;
+}
+
+.tieBadge {
+  font-size: 13px;
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-weight: 700;
+}
+
+.countSelect {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.countBtn {
+  padding: 8px 16px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 14px;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.countBtn:hover { border-color: #6366F1; }
+
+.countBtn.active {
+  background: #6366F1;
+  border-color: #6366F1;
+  color: #fff;
+  font-weight: 700;
+}
+
+/* ── CSS 주사위 ── */
+.diceRow {
+  display: flex;
+  gap: 16px;
+}
+
+.die {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  background: #f8f8f2;
+  border-radius: 16px;
+  box-shadow:
+    inset 0 -3px 0 #ccc,
+    0 6px 16px rgba(0,0,0,0.4);
+  transition: transform 0.1s;
+}
+
+.die.rolling {
+  animation: diceRoll 1s ease-out;
+}
+
+@keyframes diceRoll {
+  0%   { transform: translateY(0) rotate(0deg) scale(1); }
+  15%  { transform: translateY(-50px) translateX(-10px) rotate(-180deg) scale(1.1); }
+  30%  { transform: translateY(-20px) translateX(10px) rotate(-360deg) scale(1); }
+  45%  { transform: translateY(0) translateX(-5px) rotate(-540deg) scale(0.95); }
+  60%  { transform: translateY(-10px) translateX(5px) rotate(-680deg) scale(1.05); }
+  75%  { transform: translateY(0) translateX(-2px) rotate(-710deg) scale(1); }
+  90%  { transform: translateY(-2px) translateX(0) rotate(-720deg) scale(1); }
+  100% { transform: translateY(0) rotate(-720deg) scale(1); }
+}
+
+.dot {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #1a1a2e;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ── 점수 표시 ── */
+.sumText {
+  font-size: 22px;
+  color: #6366F1;
+  animation: popIn 0.3s ease;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+/* ── 버튼 ── */
+.btn {
+  padding: 14px 36px;
+  background: #6366F1;
+  color: #fff;
+  border-radius: var(--radius);
+  font-size: 16px;
+  font-weight: 700;
+  transition: opacity 0.15s, transform 0.15s;
+  width: 100%;
+  max-width: 320px;
+}
+
+.btn:hover:not(:disabled) {
+  opacity: 0.88;
+  transform: translateY(-2px);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btnSecondary {
+  padding: 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+  width: 100%;
+  max-width: 320px;
+  transition: background 0.15s;
+}
+
+.btnSecondary:hover { background: var(--border); }
+
+/* ── 중간 결과 ── */
+.midResults {
+  list-style: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.midResults li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: var(--surface2);
+  border-radius: var(--radius);
+  font-size: 14px;
+  border: 1px solid transparent;
+}
+
+.leading {
+  border-color: #6366F1 !important;
+  color: #a5b4fc;
+}
+
+/* ── 동점 안내 ── */
+.tieBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  animation: popIn 0.3s ease;
+}
+
+.tieEmoji { font-size: 56px; }
+
+.tieTitle {
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.tieDesc {
+  font-size: 16px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.scoreList {
+  list-style: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.scoreList li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--surface2);
+  border-radius: var(--radius);
+  font-size: 15px;
+  border: 1px solid transparent;
+}
+
+.tiedPlayer {
+  border-color: #ef4444 !important;
+  color: #f87171;
+}
+
+/* ── 최종 결과 ── */
+.finalTitle {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.winnerNames {
+  font-size: 20px;
+  font-weight: 700;
+  color: #F59E0B;
+}
+
+.tieRoundNote {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.finalList {
+  list-style: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.finalList li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--surface2);
+  border-radius: var(--radius);
+  font-size: 14px;
+  border: 1px solid transparent;
+}
+
+.winner {
+  border-color: #F59E0B !important;
+  color: #F59E0B;
+}

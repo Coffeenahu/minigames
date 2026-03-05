@@ -1,0 +1,355 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.barrelContainer {
+  position: relative;
+  width: 240px;
+  height: 300px; /* 통과 해적 공간 확보 */
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+/* --- 해적 스타일 --- */
+.pirate {
+  position: absolute;
+  bottom: 10px; /* 통 아래쪽에 위치, 통보다 작게 */
+  width: 60px;
+  height: 70px;
+  z-index: 2;
+  transform-origin: bottom center;
+  transition: transform 0.3s ease-out;
+}
+
+.pirateHead {
+  width: 50px;
+  height: 45px;
+  background: #ffdeb4; /* 살색 */
+  border-radius: 50%;
+  margin: 0 auto;
+  position: relative;
+  border: 2px solid #333;
+}
+
+.pirateHat {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 30px;
+  background: #e74c3c; /* 붉은 반다나 */
+  border-radius: 50% 50% 0 0;
+}
+.pirateHat::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  width: 20px;
+  height: 12px;
+  background: #e74c3c;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.pirateFace {
+  position: relative;
+  top: 20px;
+}
+.pirateNose {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  width: 8px;
+  height: 6px;
+  background: #ffabc4;
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+.pirateMouth {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  width: 20px;
+  height: 10px;
+  border: 2px solid #333;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  transform: translateX(-50%);
+}
+.pirateEar {
+  position: absolute;
+  top: 20px;
+  left: -6px;
+  width: 10px;
+  height: 12px;
+  background: #ffdeb4;
+  border-radius: 50%;
+}
+
+.pirateEye, .pirateEyepatch {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #000;
+}
+.pirateEye { left: 15px; }
+.pirateEyepatch {
+  left: 35px;
+  width: 12px;
+  height: 12px;
+  background: #333;
+}
+.pirateEyepatch::before { /* 안대 끈 */
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 2px;
+  background: #333;
+  top: 5px;
+  right: 5px;
+}
+
+.pirateBody {
+  width: 50px;
+  height: 30px;
+  background: #ffcd94; /* 따뜻한 살색, 좀 귀여운 톤 */
+  margin: 0 auto;
+  border-radius: 10px 10px 0 0;
+  border: 2px solid #333;
+  border-bottom: none;
+}
+
+/* --- 나무통 스타일 --- */
+.barrel {
+  position: absolute;
+  bottom: 0;
+  width: 220px;
+  height: 220px;
+  z-index: 1;
+  font-size: 5rem;
+}
+.barrelBody {
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(90deg, #8b4513 0, #8b4513 10%, #a0522d 10%, #a0522d 20%);
+  border-radius: 20px 20px 10px 10px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.4);
+  border: 5px solid #502916;
+}
+.barrelTop {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px;
+  height: 40px;
+  background: #a0522d;
+  border-radius: 50%;
+  border: 4px solid #502916;
+  z-index: 3;
+}
+
+
+/* 나무통 쇠테 */
+.barrelBody::before,
+.barrelBody::after {
+  content: '';
+  position: absolute;
+  left: -5%;
+  width: 110%;
+  height: 25px;
+  background: #7f8c8d; /* 은색 */
+  border-top: 2px solid #95a5a6;
+  border-bottom: 2px solid #34495e;
+}
+.barrelBody::before { top: 30px; }
+.barrelBody::after { bottom: 30px; }
+
+/* --- 애니메이션 --- */
+.pirateJumping {
+  animation: pirateJump 0.8s cubic-bezier(0.6, -0.28, 0.74, 1.55) forwards;
+}
+
+.barrelShaking {
+  animation: barrelShake 0.5s ease-in-out;
+}
+
+@keyframes pirateJump {
+  0% {
+    transform: translateY(20px) rotate(0deg);
+  }
+  40% {
+    transform: translateY(-140px) rotate(-20deg);
+  }
+  100% {
+    transform: translateY(-120px) rotate(720deg);
+  }
+}
+
+@keyframes barrelShake {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  20% { transform: translate(-5px, 0) rotate(-2deg); }
+  40% { transform: translate(5px, 0) rotate(2deg); }
+  60% { transform: translate(-5px, 0) rotate(-2deg); }
+  80% { transform: translate(5px, 0) rotate(2deg); }
+}
+
+.btn, .btnSecondary {
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn { background-color: #c0392b; color: white; }
+.btn:hover:not(:disabled) { background-color: #e74c3c; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btnSecondary { background-color: #7f8c8d; color: white; }
+
+/* --- 게임 UI 스타일 --- */
+.header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.turn {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.hint {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.explodingText {
+  font-size: 2rem;
+  color: #e74c3c;
+  animation: explodeText 0.8s infinite alternate;
+}
+
+@keyframes explodeText {
+  from { transform: scale(1); }
+  to   { transform: scale(1.3); }
+}
+
+.slotGrid {
+  display: grid;
+  gap: 8px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 400px;
+}
+.slot:nth-child(4n+1) { color: #e74c3c; }
+.slot:nth-child(4n+2) { color: #27ae60; }
+.slot:nth-child(4n+3) { color: #f1c40f; }
+.slot:nth-child(4n+4) { color: #3498db; }
+
+.slot::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 30px;
+  background: currentColor;
+  transform: translate(-50%, -50%) rotate(45deg);
+  border-radius: 2px;
+}
+
+.slot {
+  padding: 12px;
+  background: #ecf0f1;
+  border: 2px solid #bdc3c7;
+  border-radius: 6px;
+  font-size: 1rem;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.slot:hover:not(:disabled) {
+  background: #d0d3d4;
+}
+
+.slotEmpty { color: #333; }
+.slotStabbed {
+  background: #e74c3c;
+  color: white;
+  cursor: default;
+}
+.slotExploded {
+  background: #e67e22;
+  color: white;
+  font-weight: bold;
+}
+
+.slotIcon { margin-right: 4px; }
+.slotOwner { margin-left: 4px; font-weight: 600; }
+.slotNum { font-weight: bold; }
+
+.turnOrder {
+  margin-top: 20px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.playerChip {
+  background: #bdc3c7;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  transition: transform 0.2s;
+}
+
+.activeChip {
+  background: #2ecc71;
+  transform: scale(1.1);
+}
+
+.loserChip {
+  background: #e74c3c;
+  color: white;
+}
+
+.resultContent { text-align: center; padding: 20px; }
+
+.boom {
+  font-size: 4rem;
+  animation: boomPulse 1s infinite alternate;
+}
+
+@keyframes boomPulse {
+  from { transform: scale(1); }
+  to   { transform: scale(1.2); }
+}
+
+.loserName { font-size: 2rem; margin: 10px 0; }
+.subText { font-size: 1rem; color: #555; }
+
+.barrel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem;
+  transition: transform 0.3s, color 0.3s;
+}
+.barrel.exploded {
+  animation: barrelShake 0.5s ease-in-out;
+  color: #e74c3c;
+  transform: scale(1.3);
+}
