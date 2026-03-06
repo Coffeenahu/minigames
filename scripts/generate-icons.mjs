@@ -1,5 +1,5 @@
 import { deflateSync } from 'zlib';
-import { writeFileSync, mkdirSync } from 'fs';
+import { writeFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -24,23 +24,78 @@ function chunk(type, data) {
   return Buffer.concat([len, t, data, crcBuf]);
 }
 
-// #A1A1ED background with rounded feel (solid color PNG)
-function makePNG(size, r, g, b) {
+// Draw dice icon: purple bg + white face + darker purple dots (6 dots)
+function drawDiceIcon(size) {
+  const px = new Uint8Array(size * size * 3);
+
+  const BG   = [0xA1, 0xA1, 0xED]; // #A1A1ED
+  const FACE  = [0xFF, 0xFF, 0xFF]; // white
+  const DOT   = [0x6B, 0x58, 0xC8]; // darker purple
+
+  // Fill background
+  for (let i = 0; i < size * size; i++) {
+    px[i*3] = BG[0]; px[i*3+1] = BG[1]; px[i*3+2] = BG[2];
+  }
+
+  const set = (x, y, c) => {
+    if (x < 0 || x >= size || y < 0 || y >= size) return;
+    const i = (y * size + x) * 3;
+    px[i] = c[0]; px[i+1] = c[1]; px[i+2] = c[2];
+  };
+
+  const fillCircle = (cx, cy, r, c) => {
+    for (let y = cy - r - 1; y <= cy + r + 1; y++)
+      for (let x = cx - r - 1; x <= cx + r + 1; x++)
+        if ((x - cx) ** 2 + (y - cy) ** 2 <= r * r) set(x, y, c);
+  };
+
+  const fillRoundRect = (rx, ry, rw, rh, cr, c) => {
+    for (let y = ry; y < ry + rh; y++) {
+      for (let x = rx; x < rx + rw; x++) {
+        let ok = true;
+        if      (x < rx+cr      && y < ry+cr)       ok = (x-rx-cr)**2      + (y-ry-cr)**2      <= cr*cr;
+        else if (x >= rx+rw-cr  && y < ry+cr)       ok = (x-rx-rw+cr)**2   + (y-ry-cr)**2      <= cr*cr;
+        else if (x < rx+cr      && y >= ry+rh-cr)   ok = (x-rx-cr)**2      + (y-ry-rh+cr)**2   <= cr*cr;
+        else if (x >= rx+rw-cr  && y >= ry+rh-cr)   ok = (x-rx-rw+cr)**2   + (y-ry-rh+cr)**2   <= cr*cr;
+        if (ok) set(x, y, c);
+      }
+    }
+  };
+
+  // White dice face (with margin and rounded corners)
+  const m  = Math.round(size * 0.10);
+  const fw = size - m * 2;
+  const cr = Math.round(fw * 0.20);
+  fillRoundRect(m, m, fw, fw, cr, FACE);
+
+  // 6 dots — standard dice layout
+  const dotR = Math.round(size * 0.075);
+  const p1   = Math.round(size * 0.30);
+  const p2   = Math.round(size * 0.50);
+  const p3   = Math.round(size * 0.70);
+
+  for (const [dx, dy] of [
+    [p1, p1], [p3, p1],
+    [p1, p2], [p3, p2],
+    [p1, p3], [p3, p3],
+  ]) {
+    fillCircle(dx, dy, dotR, DOT);
+  }
+
+  return Buffer.from(px);
+}
+
+function makePNG(size) {
   const ihdr = Buffer.allocUnsafe(13);
   ihdr.writeUInt32BE(size, 0); ihdr.writeUInt32BE(size, 4);
   ihdr[8] = 8; ihdr[9] = 2; ihdr[10] = 0; ihdr[11] = 0; ihdr[12] = 0;
 
-  // Build rows: filter byte 0 + RGB pixels
+  const pixels = drawDiceIcon(size);
   const rowSize = 1 + size * 3;
   const raw = Buffer.allocUnsafe(size * rowSize);
   for (let y = 0; y < size; y++) {
-    const off = y * rowSize;
-    raw[off] = 0; // filter None
-    for (let x = 0; x < size; x++) {
-      raw[off + 1 + x * 3] = r;
-      raw[off + 2 + x * 3] = g;
-      raw[off + 3 + x * 3] = b;
-    }
+    raw[y * rowSize] = 0; // filter: None
+    pixels.copy(raw, y * rowSize + 1, y * size * 3, (y + 1) * size * 3);
   }
 
   const sig = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
@@ -48,7 +103,6 @@ function makePNG(size, r, g, b) {
 }
 
 const outDir = join(__dirname, '../public');
-// --primary: #A1A1ED
-writeFileSync(join(outDir, 'icon-192.png'), makePNG(192, 0xA1, 0xA1, 0xED));
-writeFileSync(join(outDir, 'icon-512.png'), makePNG(512, 0xA1, 0xA1, 0xED));
-console.log('Generated: public/icon-192.png (192x192), public/icon-512.png (512x512)');
+writeFileSync(join(outDir, 'icon-192.png'), makePNG(192));
+writeFileSync(join(outDir, 'icon-512.png'), makePNG(512));
+console.log('Generated dice icons: icon-192.png, icon-512.png');

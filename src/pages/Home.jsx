@@ -1,8 +1,24 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { GAMES } from '../games';
 import GameCard from '../components/common/GameCard';
 import styles from './Home.module.css';
 
 export default function Home() {
+  const navigate = useNavigate();
+  const [toast, setToast] = useState(false);
+
+  const handleRandomMatch = () => {
+    const random = GAMES[Math.floor(Math.random() * GAMES.length)];
+    navigate(`/${random.id}`);
+  };
+
+  const showToast = (e) => {
+    e.preventDefault();
+    setToast(true);
+    setTimeout(() => setToast(false), 2000);
+  };
+
   return (
     <div className={styles.page}>
       <section className={styles.hero}>
@@ -17,7 +33,7 @@ export default function Home() {
       </main>
 
       <section className={styles.quickPlay}>
-        <div className={styles.quickPlayCard}>
+        <div className={styles.quickPlayCard} onClick={handleRandomMatch} style={{ cursor: 'pointer' }}>
           <div className={styles.quickPlayIcon}>
             <span className="material-symbols-outlined" style={{ color: 'var(--primary)', fontSize: '24px' }}>
               rocket_launch
@@ -35,20 +51,24 @@ export default function Home() {
 
       <div className={styles.navSpacer} />
 
+      {toast && (
+        <div className={styles.toast}>🚧 준비 중이에요!</div>
+      )}
+
       <nav className={styles.nav}>
         <a className={`${styles.navItem} ${styles.navActive}`} href="#">
           <span className={`material-symbols-outlined ${styles.navIcon}`}>videogame_asset</span>
           <span className={styles.navLabel}>게임</span>
         </a>
-        <a className={styles.navItem} href="#">
+        <a className={styles.navItem} href="#" onClick={showToast}>
           <span className={`material-symbols-outlined ${styles.navIcon}`}>history</span>
           <span className={styles.navLabel}>기록</span>
         </a>
-        <a className={styles.navItem} href="#">
+        <a className={styles.navItem} href="#" onClick={showToast}>
           <span className={`material-symbols-outlined ${styles.navIcon}`}>emoji_events</span>
           <span className={styles.navLabel}>랭킹</span>
         </a>
-        <a className={styles.navItem} href="#">
+        <a className={styles.navItem} href="#" onClick={showToast}>
           <span className={`material-symbols-outlined ${styles.navIcon}`}>settings</span>
           <span className={styles.navLabel}>설정</span>
         </a>
