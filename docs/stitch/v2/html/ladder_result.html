@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a1a1ed",
+                        "soft-purple": "#FEF9FF",
+                        "border-purple": "#D4C1EC",
+                        "accent-purple": "#9F9FED",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121220",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body {
+            font-family: 'Plus Jakarta Sans', 'Noto Sans KR', sans-serif;
+            min-height: 100dvh;
+        }
+        .ladder-line {
+            background-color: #D4C1EC;
+            width: 4px;
+        }
+        .ladder-step {
+            height: 4px;
+            background-color: #D4C1EC;
+        }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display flex items-center justify-center">
+<div class="relative w-full max-w-[375px] h-[812px] bg-white overflow-hidden flex flex-col shadow-2xl">
+<div class="flex items-center bg-white px-4 py-4 justify-between border-b border-background-light">
+<div class="text-slate-900 flex size-10 items-center justify-center">
+<span class="material-symbols-outlined">chevron_left</span>
+</div>
+<h2 class="text-slate-900 text-lg font-bold leading-tight tracking-tight flex-1 text-center">사다리 게임</h2>
+<div class="size-10"></div>
+</div>
+<div class="flex-1 relative p-6 bg-slate-50 overflow-hidden">
+<div class="flex justify-between h-full px-8 relative opacity-40">
+<div class="flex flex-col items-center gap-4 h-full">
+<div class="size-10 rounded-full bg-primary/20 flex items-center justify-center font-bold text-primary text-xs">철수</div>
+<div class="flex-1 ladder-line"></div>
+<div class="size-10 rounded-lg bg-slate-200"></div>
+</div>
+<div class="flex flex-col items-center gap-4 h-full">
+<div class="size-10 rounded-full bg-primary/20 flex items-center justify-center font-bold text-primary text-xs">영희</div>
+<div class="flex-1 ladder-line relative">
+<div class="absolute top-1/4 left-0 w-[80px] ladder-step"></div>
+<div class="absolute top-2/4 -left-[80px] w-[80px] ladder-step"></div>
+<div class="absolute top-3/4 left-0 w-[80px] ladder-step"></div>
+</div>
+<div class="size-10 rounded-lg bg-slate-200"></div>
+</div>
+<div class="flex flex-col items-center gap-4 h-full">
+<div class="size-10 rounded-full bg-primary/20 flex items-center justify-center font-bold text-primary text-xs">민수</div>
+<div class="flex-1 ladder-line"></div>
+<div class="size-10 rounded-lg bg-slate-200"></div>
+</div>
+</div>
+<div class="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px] z-10 flex items-center justify-center p-6">
+<div class="w-full bg-[#FEF9FF] border border-[#D4C1EC] rounded-xl shadow-xl overflow-hidden flex flex-col items-center p-8 text-center">
+<div class="mb-2">
+<span class="material-symbols-outlined text-[#9F9FED] text-5xl">celebration</span>
+</div>
+<h3 class="text-slate-600 text-sm font-bold tracking-widest mb-6">게임 결과!</h3>
+<div class="mb-10">
+<p class="text-[#9F9FED] text-3xl font-extrabold mb-2">영희: 당첨! 🎉</p>
+<p class="text-slate-400 text-sm leading-relaxed">축하합니다!<br/>오늘의 주인공은 영희님입니다.</p>
+</div>
+<button class="w-full bg-[#9F9FED] hover:bg-primary transition-colors py-4 rounded-lg text-white font-bold text-lg shadow-md shadow-accent-purple/20">
+                        확인
+                    </button>
+<button class="mt-4 text-slate-400 text-sm font-medium hover:text-slate-600">
+                        다시 하기
+                    </button>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>

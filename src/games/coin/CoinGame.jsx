@@ -46,15 +46,15 @@ export default function CoinGame({ players, onReset }) {
             {players[1]}님은 나머지 면이 자동 배정됩니다
           </p>
           <div className={styles.choiceBtns}>
-            <button className={`${styles.choiceBtn} ${styles.heads}`} onClick={() => choose('heads')}>
-              <div className={styles.miniCoin}>
-                <span className={styles.coinText}>앞</span>
+            <button className={styles.choiceBtn} onClick={() => choose('heads')}>
+              <div className={styles.miniCoinFace}>
+                <span className={styles.miniCoinLabel}>앞</span>
               </div>
               앞면
             </button>
-            <button className={`${styles.choiceBtn} ${styles.tails}`} onClick={() => choose('tails')}>
-              <div className={`${styles.miniCoin} ${styles.miniCoinBack}`}>
-                <span className={styles.coinText}>뒤</span>
+            <button className={styles.choiceBtn} onClick={() => choose('tails')}>
+              <div className={`${styles.miniCoinFace} ${styles.miniCoinBackFace}`}>
+                <span className={styles.miniCoinLabel}>뒤</span>
               </div>
               뒷면
             </button>

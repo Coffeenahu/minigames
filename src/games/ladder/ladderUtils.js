@@ -1,40 +1,79 @@
-/** 사다리 생성 */
-export function generateLadder(colCount, rowCount = 10) {
-  const rows = [];
-  for (let r = 0; r < rowCount; r++) {
-    const row = Array(colCount - 1).fill(false);
-    for (let c = 0; c < colCount - 1; c++) {
-      // 이전 칸이 가로줄이면 건너뜀 (인접 가로줄 방지)
-      if (c > 0 && row[c - 1]) continue;
-      row[c] = Math.random() < 0.45;
-    }
-    rows.push(row);
+/**
+ * Fisher-Yates Shuffle algorithm for results
+ */
+export const shuffleArray = (array) => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
-  return rows;
-}
+  return shuffled;
+};
 
-/** 경로 추적: startCol → endCol, 각 스텝 좌표 반환 */
-export function tracePath(rows, startCol) {
-  const path = [{ col: startCol, row: 0 }];
-  let col = startCol;
-  for (let r = 0; r < rows.length; r++) {
-    // 왼쪽 가로줄
-    if (col > 0 && rows[r][col - 1]) {
-      col -= 1;
+/**
+ * Generate a ladder grid with no adjacent horizontal lines.
+ * ladder[row][col] === true means there's a horizontal line between col and col+1
+ */
+export const generateLadder = (cols, rows) => {
+  const grid = Array.from({ length: rows }, () => Array(cols - 1).fill(false));
+
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols - 1; c++) {
+      // 1. Randomly decide to place a line
+      // 2. CHECK: Must not have a line at c-1 in the same row
+      if (Math.random() > 0.5) {
+        if (c === 0 || !grid[r][c - 1]) {
+          grid[r][c] = true;
+        }
+      }
     }
-    // 오른쪽 가로줄
-    else if (col < rows[0].length && rows[r][col]) {
-      col += 1;
-    }
-    path.push({ col, row: r + 1 });
   }
+  return grid;
+};
+
+/**
+ * Trace the exact path for a specific starting column.
+ * Returns an array of coordinates [{col, row}, ...]
+ */
+export const tracePath = (grid, startCol) => {
+  const rows = grid.length;
+  const path = [];
+  let currentCol = startCol;
+
+  // Start point
+  path.push({ col: currentCol, row: 0 });
+
+  for (let r = 0; r < rows; r++) {
+    // Check right (if currentCol is c)
+    if (grid[r][currentCol]) {
+      path.push({ col: currentCol, row: r + 1 }); // Move down to row
+      currentCol++;
+      path.push({ col: currentCol, row: r + 1 }); // Move right
+    } 
+    // Check left (if currentCol is c+1)
+    else if (currentCol > 0 && grid[r][currentCol - 1]) {
+      path.push({ col: currentCol, row: r + 1 }); // Move down to row
+      currentCol--;
+      path.push({ col: currentCol, row: r + 1 }); // Move left
+    }
+    // No horizontal line, just move down at the end of loop
+  }
+
+  // End point (bottom)
+  path.push({ col: currentCol, row: rows + 1 });
+
   return path;
-}
+};
 
-/** 모든 참가자 결과 매핑: startCol → endCol */
-export function mapResults(rows, count) {
-  return Array.from({ length: count }, (_, i) => {
-    const path = tracePath(rows, i);
-    return path[path.length - 1].col;
-  });
-}
+/**
+ * Pre-calculate all final results for mapping
+ */
+export const mapResults = (grid, cols) => {
+  const results = [];
+  for (let i = 0; i < cols; i++) {
+    const path = tracePath(grid, i);
+    const finalCol = path[path.length - 1].col;
+    results[i] = finalCol; // Player i reaches Outcome at finalCol
+  }
+  return results;
+};

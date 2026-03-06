@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>사다리 설정 1단계: 참여자 입력</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#9F9FED",
+                        "secondary": "#D4C1EC",
+                        "background-light": "#FEF9FF",
+                        "background-dark": "#121220",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FEF9FF;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#FEF9FF] text-slate-900 min-h-screen flex flex-col">
+<header class="px-6 pt-16 pb-4 sticky top-0 bg-[#FEF9FF]/90 backdrop-blur-sm z-10 flex items-center gap-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 text-slate-700 transition-transform active:scale-95">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-2xl font-extrabold">참여자 명단 입력</h1>
+</header>
+<main class="flex-1 px-6 pt-4 flex flex-col gap-4 pb-48">
+<div class="flex items-center gap-3">
+<div class="flex-1 bg-[#D4C1EC] rounded-2xl p-4 shadow-sm flex items-center gap-3">
+<span class="w-8 h-8 rounded-full bg-white/60 flex items-center justify-center text-sm font-extrabold text-[#9F9FED]">1</span>
+<input class="flex-1 bg-white border-transparent rounded-xl text-sm focus:ring-[#9F9FED] focus:border-[#9F9FED] font-bold py-3 px-4 placeholder:font-medium placeholder:text-slate-400" placeholder="참여자 1" type="text" value="철수"/>
+</div>
+<button class="w-10 h-10 bg-white shadow-sm rounded-full flex items-center justify-center text-red-400 transition-transform active:scale-95 shrink-0">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex-1 bg-[#D4C1EC] rounded-2xl p-4 shadow-sm flex items-center gap-3">
+<span class="w-8 h-8 rounded-full bg-white/60 flex items-center justify-center text-sm font-extrabold text-[#9F9FED]">2</span>
+<input class="flex-1 bg-white border-transparent rounded-xl text-sm focus:ring-[#9F9FED] focus:border-[#9F9FED] font-bold py-3 px-4 placeholder:font-medium placeholder:text-slate-400" placeholder="참여자 2" type="text" value="영희"/>
+</div>
+<button class="w-10 h-10 bg-white shadow-sm rounded-full flex items-center justify-center text-red-400 transition-transform active:scale-95 shrink-0">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex-1 bg-[#D4C1EC] rounded-2xl p-4 shadow-sm flex items-center gap-3">
+<span class="w-8 h-8 rounded-full bg-white/60 flex items-center justify-center text-sm font-extrabold text-[#9F9FED]">3</span>
+<input class="flex-1 bg-white border-transparent rounded-xl text-sm focus:ring-[#9F9FED] focus:border-[#9F9FED] font-bold py-3 px-4 placeholder:font-medium placeholder:text-slate-400" placeholder="참여자 3" type="text" value="민수"/>
+</div>
+<button class="w-10 h-10 bg-white shadow-sm rounded-full flex items-center justify-center text-red-400 transition-transform active:scale-95 shrink-0">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<button class="w-full py-4 mt-2 border-2 border-dashed border-[#9F9FED] text-[#9F9FED] rounded-2xl font-extrabold flex items-center justify-center gap-2 bg-[#9F9FED]/5 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-[20px]">add</span>
+            인원 추가하기 (3/8)
+        </button>
+</main>
+<div class="fixed bottom-0 left-0 right-0 px-6 pt-6 pb-20 bg-gradient-to-t from-[#FEF9FF] via-[#FEF9FF] to-transparent z-20">
+<div class="max-w-md mx-auto">
+<button class="w-full h-16 bg-[#9F9FED] text-white font-extrabold text-lg rounded-2xl shadow-lg shadow-[#9F9FED]/30 transition-transform active:scale-95 flex justify-center items-center gap-2">
+                다음으로 (1/2)
+                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</body></html>
