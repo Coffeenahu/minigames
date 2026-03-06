@@ -1,4 +1,4 @@
-/* ===== 해양 테마 배경 ===== */
+/* ===== 라이트 테마 배경 ===== */
 .wrap {
   display: flex;
   flex-direction: column;
@@ -6,48 +6,41 @@
   gap: 16px;
   padding: 20px 16px;
   min-height: 100vh;
-  background: linear-gradient(
-    180deg,
-    #0a1628 0%,
-    #0d2040 40%,
-    #0f2d50 100%
-  );
+  background: var(--bg);
 }
 
 /* ===== 헤더 ===== */
 .header {
   text-align: center;
   padding: 14px 24px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(201, 168, 76, 0.3);
-  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
   width: 100%;
   max-width: 500px;
   box-sizing: border-box;
-  backdrop-filter: blur(4px);
 }
 
 .turn {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
-  color: #FFD700;
+  color: var(--primary);
   margin: 0;
-  text-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
 }
 
 .hint {
-  font-size: 13px;
-  color: #a0b8d0;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
   margin: 6px 0 0;
 }
 
 .explodingText {
-  font-size: 28px;
-  font-weight: bold;
+  font-size: 26px;
+  font-weight: 800;
   color: #FF6B35;
   margin: 0;
   animation: pulse 0.5s ease-in-out infinite;
-  text-shadow: 0 0 20px rgba(255, 107, 53, 0.8);
 }
 
 @keyframes pulse {
@@ -55,23 +48,23 @@
   50% { opacity: 0.7; transform: scale(1.05); }
 }
 
-/* ===== 씬 컨테이너 ===== */
+/* ===== 씬 컨테이너 - 이미지 영역 절대 보존 ===== */
 .sceneContainer {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* ===== 해적+나무통 이미지 ===== */
+/* ===== 해적+나무통 이미지 - 크기/필터/레이아웃 보존 ===== */
 .pirateImg {
   width: 260px;
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.6));
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.15));
   transition: filter 0.2s ease;
 }
 
-/* 흔들기 (안전한 슬롯 클릭) */
+/* 흔들기 (안전한 슬롯 클릭) - 보존 */
 .pirateImg.shaking {
   animation: shake 0.45s ease-in-out;
 }
@@ -82,17 +75,17 @@
   30%, 60%, 90% { transform: rotate(2deg) translateX(4px); }
 }
 
-/* 폭발 (당첨 슬롯 클릭) */
+/* 폭발 (당첨 슬롯 클릭) - 보존 */
 .pirateImg.exploding {
   animation: explode 0.7s ease-out;
 }
 
 @keyframes explode {
-  0%   { transform: scale(1) rotate(0deg);   filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6)); }
+  0%   { transform: scale(1) rotate(0deg);    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.15)); }
   20%  { transform: scale(1.08) rotate(-3deg); filter: drop-shadow(0 0 30px rgba(255,140,0,0.9)) drop-shadow(0 0 60px rgba(255,60,0,0.6)); }
   45%  { transform: scale(1.15) rotate(3deg);  filter: drop-shadow(0 0 40px rgba(255,200,0,1))   drop-shadow(0 0 80px rgba(255,80,0,0.8)); }
   70%  { transform: scale(1.05) rotate(-1deg); filter: drop-shadow(0 0 20px rgba(255,120,0,0.7)); }
-  100% { transform: scale(1) rotate(0deg);   filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6)); }
+  100% { transform: scale(1) rotate(0deg);    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.15)); }
 }
 
 /* ===== 슬롯 그리드 ===== */
@@ -100,9 +93,9 @@
   display: grid;
   gap: 10px;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(201, 168, 76, 0.2);
-  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
   width: 100%;
   max-width: 600px;
   box-sizing: border-box;
@@ -126,40 +119,36 @@
   gap: 2px;
 }
 
-/* 빈 슬롯 - 구멍 느낌 */
+/* 빈 슬롯 - 라이트 */
 .slot.slotEmpty {
-  background: radial-gradient(circle at 40% 35%, #2a1a08 0%, #1a0d04 50%, #0d0602 100%);
+  background: var(--surface2);
   box-shadow:
-    inset 0 4px 12px rgba(0, 0, 0, 0.9),
-    0 2px 6px rgba(0, 0, 0, 0.4),
-    0 0 0 2px rgba(139, 94, 46, 0.5);
-  color: #8B6F47;
+    inset 0 2px 6px rgba(0, 0, 0, 0.06),
+    0 0 0 2px var(--border);
+  color: var(--text-muted);
 }
 
 .slot.slotEmpty:hover {
   box-shadow:
-    inset 0 4px 12px rgba(0, 0, 0, 0.8),
-    0 0 0 2px rgba(201, 168, 76, 0.7),
-    0 0 14px rgba(201, 168, 76, 0.3);
+    inset 0 2px 6px rgba(0, 0, 0, 0.06),
+    0 0 0 2px var(--primary);
   transform: scale(1.08);
-  color: #C9A84C;
+  color: var(--primary);
 }
 
 .slot.slotEmpty:active {
   transform: scale(0.94);
 }
 
-/* 칼이 꽂힌 슬롯 */
+/* 칼이 꽂힌 슬롯 - primary 라이트 */
 .slot.slotStabbed {
-  background: radial-gradient(circle at 40% 35%, #3d2810 0%, #2a1808 100%);
-  box-shadow:
-    inset 0 6px 16px rgba(0, 0, 0, 0.95),
-    0 0 0 2px rgba(139, 94, 46, 0.4);
-  color: #FFD700;
+  background: rgba(161, 161, 237, 0.12);
+  box-shadow: 0 0 0 2px rgba(161, 161, 237, 0.3);
+  color: var(--primary);
   cursor: not-allowed;
 }
 
-/* 폭발한 슬롯 */
+/* 폭발한 슬롯 - 보존 */
 .slot.slotExploded {
   background: radial-gradient(circle at 50% 50%, #FFD700 0%, #FF6B35 50%, #cc2200 100%);
   box-shadow:
@@ -189,16 +178,16 @@
 }
 
 .slotNum {
-  font-size: 15px;
-  color: #6B5637;
-  font-weight: bold;
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 700;
 }
 
 .slotOwner {
   display: block;
   font-size: 10px;
-  color: #C9A84C;
-  font-weight: bold;
+  color: var(--primary);
+  font-weight: 700;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -216,9 +205,9 @@
   justify-content: center;
   gap: 10px;
   padding: 14px 16px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
   width: 100%;
   max-width: 500px;
   box-sizing: border-box;
@@ -226,24 +215,25 @@
 
 .playerChip {
   padding: 7px 16px;
-  background: rgba(255, 255, 255, 0.08);
-  color: #a0b8d0;
-  border-radius: 20px;
+  background: var(--surface2);
+  color: var(--text-muted);
+  border-radius: 9999px;
   font-size: 13px;
   font-weight: 500;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border);
   transition: all 0.3s ease;
 }
 
 .playerChip.activeChip {
-  background: linear-gradient(135deg, #C9A84C, #FFD700);
-  color: #1a0d06;
-  transform: scale(1.12);
+  background: var(--primary);
+  color: white;
+  transform: scale(1.1);
   font-weight: 700;
   border-color: transparent;
-  box-shadow: 0 4px 14px rgba(201, 168, 76, 0.5);
+  box-shadow: 0 4px 14px rgba(161, 161, 237, 0.4);
 }
 
+/* 탈락 칩 - 보존 (강조 표현) */
 .playerChip.loserChip {
   background: linear-gradient(135deg, #8B1a14, #cc2200);
   color: #ffaaaa;
@@ -268,13 +258,14 @@
 
 .loserName {
   font-size: 26px;
+  font-weight: 800;
   color: #FF6B35;
   margin: 10px 0;
 }
 
 .subText {
   font-size: 15px;
-  color: #888;
+  color: var(--text-muted);
 }
 
 /* ===== 반응형 ===== */
@@ -292,7 +283,7 @@
   .slotIcon { font-size: 16px; }
   .slotOwner { font-size: 9px; }
   .playerChip { font-size: 12px; padding: 6px 12px; }
-  .turn { font-size: 18px; }
+  .turn { font-size: 17px; }
 }
 
 @media (min-width: 601px) and (max-width: 1024px) {

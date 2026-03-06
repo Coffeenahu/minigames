@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import GameIcon from './GameIcon';
 import styles from './GameCard.module.css';
 
 export default function GameCard({ game }) {
@@ -6,13 +7,16 @@ export default function GameCard({ game }) {
   return (
     <button
       className={styles.card}
-      style={{ '--game-color': game.color }}
       onClick={() => navigate(`/${game.id}`)}
       aria-label={game.name}
     >
-      <span className={styles.icon}>{game.icon}</span>
-      <h2 className={styles.name}>{game.name}</h2>
-      <p className={styles.desc}>{game.description}</p>
+      <div className={styles.cardTop}>
+        <div className={styles.iconWrap}>
+          <GameIcon gameId={game.id} />
+        </div>
+        <h2 className={styles.name}>{game.name}</h2>
+      </div>
+      <div className={styles.playBtn}>시작하기</div>
     </button>
   );
 }

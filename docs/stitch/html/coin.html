@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a1a1ed",
+                        "secondary": "#D4C1EC",
+                        "background-light": "#FEF9FF",
+                        "background-dark": "#121220",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<header class="flex items-center justify-between px-6 pt-12 pb-4 bg-transparent">
+<button class="size-10 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-sm border border-primary/10">
+<span class="material-symbols-outlined text-slate-700 dark:text-slate-200">arrow_back_ios_new</span>
+</button>
+<h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Coin Toss</h1>
+<button class="size-10 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-sm border border-primary/10">
+<span class="material-symbols-outlined text-slate-700 dark:text-slate-200">info</span>
+</button>
+</header>
+<main class="flex-1 flex flex-col items-center justify-center px-6 gap-12">
+<div class="relative group">
+<div class="absolute inset-0 bg-primary/20 blur-3xl rounded-full scale-110"></div>
+<div class="relative size-64 md:size-80 rounded-full bg-gradient-to-tr from-yellow-400 via-yellow-200 to-yellow-500 shadow-[0_20px_50px_rgba(234,179,8,0.3)] flex items-center justify-center border-8 border-yellow-600/20 overflow-hidden" data-alt="A large shiny golden coin with a crown emblem">
+<div class="absolute inset-2 border-4 border-dashed border-yellow-600/30 rounded-full"></div>
+<span class="material-symbols-outlined text-8xl text-yellow-700/80" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+</div>
+<div class="w-full max-w-sm space-y-4">
+<p class="text-center font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest text-xs">Choose Your Side</p>
+<div class="flex gap-4 p-2 bg-secondary/20 dark:bg-secondary/10 rounded-2xl">
+<label class="flex-1 cursor-pointer">
+<input checked="" class="hidden peer" name="side" type="radio" value="heads"/>
+<div class="py-4 text-center rounded-xl bg-transparent peer-checked:bg-white dark:peer-checked:bg-slate-800 peer-checked:shadow-lg peer-checked:text-primary transition-all duration-300 font-bold text-slate-600 dark:text-slate-300">
+                        Heads
+                    </div>
+</label>
+<label class="flex-1 cursor-pointer">
+<input class="hidden peer" name="side" type="radio" value="tails"/>
+<div class="py-4 text-center rounded-xl bg-transparent peer-checked:bg-white dark:peer-checked:bg-slate-800 peer-checked:shadow-lg peer-checked:text-primary transition-all duration-300 font-bold text-slate-600 dark:text-slate-300">
+                        Tails
+                    </div>
+</label>
+</div>
+</div>
+<div class="w-full max-w-sm pb-8">
+<button class="w-full py-5 bg-primary text-white rounded-2xl font-bold text-xl shadow-xl shadow-primary/40 hover:scale-[1.02] active:scale-95 transition-transform">
+                FLIP COIN
+            </button>
+</div>
+</main>
+<nav class="sticky bottom-0 w-full bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 px-6 py-4 pb-8">
+<div class="flex justify-between items-center max-w-md mx-auto">
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Games</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary active-tab" href="#">
+<span class="material-symbols-outlined">toll</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Play</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">History</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Settings</span>
+</a>
+</div>
+</nav>
+</body></html>

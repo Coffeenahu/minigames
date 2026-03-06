@@ -7,7 +7,7 @@
 }
 
 .turn {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--text-muted);
   text-align: center;
@@ -15,56 +15,75 @@
 }
 
 .tieBadge {
-  font-size: 13px;
-  background: rgba(239, 68, 68, 0.15);
+  font-size: 12px;
+  background: rgba(239, 68, 68, 0.12);
   color: #ef4444;
   padding: 3px 10px;
-  border-radius: 100px;
+  border-radius: 9999px;
   font-weight: 700;
 }
 
+/* ── pill 토글 ── */
 .countSelect {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 15px;
-  color: var(--text-muted);
+  background: rgba(161, 161, 237, 0.1);
+  border-radius: 9999px;
+  padding: 6px;
+  width: 100%;
+  max-width: 280px;
+}
+
+/* "주사위 개수" 텍스트 숨김 - pill이 self-explanatory */
+.countSelect > p {
+  display: none;
 }
 
 .countBtn {
-  padding: 8px 16px;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  color: var(--text);
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 9999px;
   font-size: 14px;
-  transition: background 0.15s, border-color 0.15s;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
 }
 
-.countBtn:hover { border-color: #6366F1; }
+.countBtn:hover:not(.active) {
+  color: var(--primary);
+}
 
 .countBtn.active {
-  background: #6366F1;
-  border-color: #6366F1;
-  color: #fff;
+  background: white;
+  color: var(--primary);
   font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* ── CSS 주사위 ── */
+/* ── 주사위 ── */
 .diceRow {
   display: flex;
-  gap: 16px;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .die {
   position: relative;
-  width: 88px;
-  height: 88px;
-  background: #f8f8f2;
-  border-radius: 16px;
+  width: 140px;
+  height: 140px;
+  background: #1e293b;
+  border-radius: 1.5rem;
+  border: 1px solid #0f172a;
+  border-bottom: 5px solid #0f172a;
+  border-right: 5px solid #0f172a;
   box-shadow:
-    inset 0 -3px 0 #ccc,
-    0 6px 16px rgba(0,0,0,0.4);
+    0 4px 6px -1px rgba(0, 0, 0, 0.3),
+    0 10px 20px -4px rgba(0, 0, 0, 0.2);
   transition: transform 0.1s;
 }
 
@@ -74,10 +93,10 @@
 
 @keyframes diceRoll {
   0%   { transform: translateY(0) rotate(0deg) scale(1); }
-  15%  { transform: translateY(-50px) translateX(-10px) rotate(-180deg) scale(1.1); }
-  30%  { transform: translateY(-20px) translateX(10px) rotate(-360deg) scale(1); }
-  45%  { transform: translateY(0) translateX(-5px) rotate(-540deg) scale(0.95); }
-  60%  { transform: translateY(-10px) translateX(5px) rotate(-680deg) scale(1.05); }
+  15%  { transform: translateY(-40px) translateX(-8px) rotate(-180deg) scale(1.08); }
+  30%  { transform: translateY(-16px) translateX(8px) rotate(-360deg) scale(1); }
+  45%  { transform: translateY(0) translateX(-4px) rotate(-540deg) scale(0.96); }
+  60%  { transform: translateY(-8px) translateX(4px) rotate(-680deg) scale(1.04); }
   75%  { transform: translateY(0) translateX(-2px) rotate(-710deg) scale(1); }
   90%  { transform: translateY(-2px) translateX(0) rotate(-720deg) scale(1); }
   100% { transform: translateY(0) rotate(-720deg) scale(1); }
@@ -85,18 +104,33 @@
 
 .dot {
   position: absolute;
-  width: 14px;
-  height: 14px;
-  background: #1a1a2e;
+  width: 16px;
+  height: 16px;
+  background: white;
   border-radius: 50%;
   transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
-/* ── 점수 표시 ── */
+/* ── Current Total 표시 ── */
 .sumText {
-  font-size: 22px;
-  color: #6366F1;
+  text-align: center;
   animation: popIn 0.3s ease;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--secondary);
+}
+
+.sumText strong {
+  display: block;
+  font-size: 60px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-top: 4px;
 }
 
 @keyframes popIn {
@@ -106,19 +140,24 @@
 
 /* ── 버튼 ── */
 .btn {
-  padding: 14px 36px;
-  background: #6366F1;
-  color: #fff;
-  border-radius: var(--radius);
-  font-size: 16px;
-  font-weight: 700;
-  transition: opacity 0.15s, transform 0.15s;
   width: 100%;
   max-width: 320px;
+  padding: 20px 0;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 1rem;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(161, 161, 237, 0.4);
+  transition: opacity 0.15s, transform 0.15s;
 }
 
 .btn:hover:not(:disabled) {
-  opacity: 0.88;
+  opacity: 0.9;
   transform: translateY(-2px);
 }
 
@@ -128,19 +167,22 @@
 }
 
 .btnSecondary {
-  padding: 12px;
+  width: 100%;
+  max-width: 320px;
+  padding: 14px 0;
   background: var(--surface2);
   border: 1px solid var(--border);
   color: var(--text-muted);
-  border-radius: var(--radius);
+  border-radius: 1rem;
   font-size: 14px;
   font-weight: 600;
-  width: 100%;
-  max-width: 320px;
+  cursor: pointer;
   transition: background 0.15s;
 }
 
-.btnSecondary:hover { background: var(--border); }
+.btnSecondary:hover {
+  background: var(--border);
+}
 
 /* ── 중간 결과 ── */
 .midResults {
@@ -154,16 +196,16 @@
 .midResults li {
   display: flex;
   justify-content: space-between;
-  padding: 8px 14px;
+  padding: 10px 16px;
   background: var(--surface2);
-  border-radius: var(--radius);
+  border-radius: 0.75rem;
   font-size: 14px;
   border: 1px solid transparent;
 }
 
 .leading {
-  border-color: #6366F1 !important;
-  color: #a5b4fc;
+  border-color: var(--primary) !important;
+  color: var(--primary);
 }
 
 /* ── 동점 안내 ── */
@@ -176,15 +218,16 @@
   animation: popIn 0.3s ease;
 }
 
-.tieEmoji { font-size: 56px; }
+.tieEmoji { font-size: 52px; }
 
 .tieTitle {
   font-size: 28px;
   font-weight: 900;
+  color: var(--text);
 }
 
 .tieDesc {
-  font-size: 16px;
+  font-size: 15px;
   color: var(--text-muted);
   text-align: center;
 }
@@ -202,7 +245,7 @@
   justify-content: space-between;
   padding: 10px 16px;
   background: var(--surface2);
-  border-radius: var(--radius);
+  border-radius: 0.75rem;
   font-size: 15px;
   border: 1px solid transparent;
 }
@@ -216,12 +259,13 @@
 .finalTitle {
   font-size: 24px;
   font-weight: 800;
+  color: var(--text);
 }
 
 .winnerNames {
   font-size: 20px;
   font-weight: 700;
-  color: #F59E0B;
+  color: var(--primary);
 }
 
 .tieRoundNote {
@@ -242,12 +286,12 @@
   justify-content: space-between;
   padding: 10px 16px;
   background: var(--surface2);
-  border-radius: var(--radius);
+  border-radius: 0.75rem;
   font-size: 14px;
   border: 1px solid transparent;
 }
 
 .winner {
-  border-color: #F59E0B !important;
-  color: #F59E0B;
+  border-color: var(--primary) !important;
+  color: var(--primary);
 }

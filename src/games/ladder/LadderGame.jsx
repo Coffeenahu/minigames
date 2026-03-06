@@ -53,7 +53,7 @@ export default function LadderGame({ players, onReset }) {
           {Array.from({ length: count }, (_, c) => (
             <line key={`v${c}`}
               x1={xOf(c)} y1={PAD_Y} x2={xOf(c)} y2={svgH - PAD_Y}
-              stroke="#2e2e45" strokeWidth="3" strokeLinecap="round"
+              stroke="#D4C1EC" strokeWidth="3" strokeLinecap="round"
             />
           ))}
 
@@ -63,7 +63,7 @@ export default function LadderGame({ players, onReset }) {
               has ? (
                 <line key={`h${r}${c}`}
                   x1={xOf(c)} y1={yOf(r + 1)} x2={xOf(c + 1)} y2={yOf(r + 1)}
-                  stroke="#2e2e45" strokeWidth="3" strokeLinecap="round"
+                  stroke="#D4C1EC" strokeWidth="3" strokeLinecap="round"
                 />
               ) : null
             )
@@ -91,7 +91,7 @@ export default function LadderGame({ players, onReset }) {
             <text key={`name${c}`}
               x={xOf(c)} y={PAD_Y - 16}
               textAnchor="middle"
-              fill={revealed.includes(c) ? COLORS[c % COLORS.length] : '#8888aa'}
+              fill={revealed.includes(c) ? COLORS[c % COLORS.length] : '#c4afd8'}
               fontSize="13" fontWeight="700"
             >
               {name}
@@ -106,7 +106,7 @@ export default function LadderGame({ players, onReset }) {
               <text key={`out${c}`}
                 x={xOf(c)} y={svgH - PAD_Y + 20}
                 textAnchor="middle"
-                fill={isRevealed ? COLORS[playerIdx % COLORS.length] : '#8888aa'}
+                fill={isRevealed ? COLORS[playerIdx % COLORS.length] : '#c4afd8'}
                 fontSize="12" fontWeight={isRevealed ? '700' : '400'}
               >
                 {outcome}

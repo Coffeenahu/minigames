@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dice Roll Game Screen</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a1a1ed",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121220",
+                        "accent-soft": "#D4C1EC",
+                        "accent-vibrant": "#9F9FED"
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .dice-shadow {
+            box-shadow: 0 20px 25px -5px rgba(161, 161, 237, 0.2), 0 10px 10px -5px rgba(161, 161, 237, 0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#FEF9FF] text-slate-900 font-display">
+<div class="relative flex min-h-screen w-full flex-col max-w-[430px] mx-auto bg-[#FEF9FF] shadow-2xl overflow-hidden">
+<div class="flex items-center p-4 pb-2 justify-between">
+<div class="text-slate-900 flex size-12 shrink-0 items-center justify-start">
+<span class="material-symbols-outlined text-2xl">arrow_back_ios</span>
+</div>
+<h2 class="text-slate-900 text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Dice Roll</h2>
+<div class="flex w-12 items-center justify-end">
+<button class="flex items-center justify-center rounded-lg h-12 bg-transparent text-slate-900">
+<span class="material-symbols-outlined text-2xl">help</span>
+</button>
+</div>
+</div>
+<div class="flex px-8 py-6">
+<div class="flex h-12 flex-1 items-center justify-center rounded-full bg-primary/10 p-1.5 border border-primary/20">
+<label class="flex cursor-pointer h-full grow items-center justify-center rounded-full px-4 has-[:checked]:bg-white has-[:checked]:shadow-sm has-[:checked]:text-primary text-slate-500 text-sm font-semibold transition-all">
+<span>1 Die</span>
+<input class="hidden" name="dice-count" type="radio" value="1"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center rounded-full px-4 has-[:checked]:bg-white has-[:checked]:shadow-sm has-[:checked]:text-primary text-slate-500 text-sm font-semibold transition-all">
+<span>2 Dice</span>
+<input checked="" class="hidden" name="dice-count" type="radio" value="2"/>
+</label>
+</div>
+</div>
+<div class="flex flex-col flex-1 items-center justify-center px-4 py-8">
+<div class="grid grid-cols-2 gap-6 w-full max-w-[320px]">
+<div class="aspect-square bg-white rounded-3xl dice-shadow flex items-center justify-center border-b-8 border-r-8 border-slate-200 relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-white via-slate-50 to-slate-100 opacity-50"></div>
+<div class="grid grid-cols-3 grid-rows-3 gap-2 p-6 z-10 w-full h-full">
+<div class="flex items-center justify-center"><div class="size-4 bg-slate-800 rounded-full"></div></div>
+<div></div>
+<div class="flex items-center justify-center"><div class="size-4 bg-slate-800 rounded-full"></div></div>
+<div></div>
+<div></div>
+<div></div>
+<div class="flex items-center justify-center"><div class="size-4 bg-slate-800 rounded-full"></div></div>
+<div></div>
+<div class="flex items-center justify-center"><div class="size-4 bg-slate-800 rounded-full"></div></div>
+</div>
+</div>
+<div class="aspect-square bg-white rounded-3xl dice-shadow flex items-center justify-center border-b-8 border-r-8 border-slate-200 relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-white via-slate-50 to-slate-100 opacity-50"></div>
+<div class="grid grid-cols-3 grid-rows-3 gap-2 p-6 z-10 w-full h-full">
+<div class="flex items-center justify-center"><div class="size-4 bg-slate-800 rounded-full"></div></div>
+<div></div>
+<div></div>
+<div></div>
+<div class="flex items-center justify-center"><div class="size-4 bg-slate-800 rounded-full"></div></div>
+<div></div>
+<div></div>
+<div></div>
+<div class="flex items-center justify-center"><div class="size-4 bg-slate-800 rounded-full"></div></div>
+</div>
+</div>
+</div>
+<div class="mt-16 text-center">
+<span class="text-accent-soft font-bold text-sm uppercase tracking-widest">Current Total</span>
+<h1 class="text-slate-900 text-6xl font-extrabold mt-2">7</h1>
+</div>
+</div>
+<div class="p-6 pb-10">
+<button class="w-full bg-accent-vibrant hover:bg-primary text-white font-bold py-5 rounded-2xl shadow-lg shadow-accent-vibrant/40 transition-all text-xl tracking-wider active:scale-[0.98]">
+                ROLL
+            </button>
+</div>
+<div class="flex gap-2 border-t border-slate-100 bg-white/80 backdrop-blur-md px-4 pb-8 pt-3">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined text-2xl fill-1">casino</span>
+<span class="text-[10px] font-bold">Dice</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined text-2xl">style</span>
+<span class="text-[10px] font-medium">Cards</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined text-2xl">sports_esports</span>
+<span class="text-[10px] font-medium">Spin</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined text-2xl">redeem</span>
+<span class="text-[10px] font-medium">Loot</span>
+</a>
+</div>
+<div class="absolute bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-slate-200 rounded-full"></div>
+</div>
+</body></html>
