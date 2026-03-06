@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- 배경 -->
+  <rect width="512" height="512" rx="112" fill="#9F9FED"/>
+
+  <!-- 주사위 몸체 -->
+  <rect x="120" y="120" width="272" height="272" rx="52" fill="white" opacity="0.95"/>
+
+  <!-- 주사위 점 (6면) -->
+  <!-- 좌상 -->
+  <circle cx="196" cy="196" r="26" fill="#9F9FED"/>
+  <!-- 우상 -->
+  <circle cx="316" cy="196" r="26" fill="#9F9FED"/>
+  <!-- 좌중 -->
+  <circle cx="196" cy="256" r="26" fill="#9F9FED"/>
+  <!-- 우중 -->
+  <circle cx="316" cy="256" r="26" fill="#9F9FED"/>
+  <!-- 좌하 -->
+  <circle cx="196" cy="316" r="26" fill="#9F9FED"/>
+  <!-- 우하 -->
+  <circle cx="316" cy="316" r="26" fill="#9F9FED"/>
+</svg>
